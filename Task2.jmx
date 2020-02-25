@@ -80,7 +80,7 @@
             </elementProp>
           </collectionProp>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">localhost</stringProp>
+        <stringProp name="HTTPSampler.domain">10.23.12.7</stringProp>
         <stringProp name="HTTPSampler.port"></stringProp>
         <stringProp name="HTTPSampler.protocol">http</stringProp>
         <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -106,6 +106,94 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
       </ThreadGroup>
       <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Login" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET_Login_Page" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/blog/Account/Login.aspx</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST_Login" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="ctl00$MainContent$LoginUser$Password" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">editor</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">ctl00$MainContent$LoginUser$Password</stringProp>
+                </elementProp>
+                <elementProp name="__EVENTVALIDATION" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.value">dgZ3Rc9hXUqjiyG+eYd9hUEaV1v1syoE+/qSC3tNPyFt4eOriaVaXqFwMmA9+5oYvA309m8HONhACx2PsMCh6zrv3mPYNZfH27bXv3vvIyIepBrAHtG+g82rUWjyZS30z7Y7W0N2MJmU51V8EBoN4SnXXHQonr4edt68BGssYBx4Xkna</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">__EVENTVALIDATION</stringProp>
+                </elementProp>
+                <elementProp name="__VIEWSTATE" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.value">7pkQg+MN3eyyx2uArXQgtLLNU3pI2rX+ibQjVwHDRv/NusWrJ8HBLbXyMBkgwrf4cgjKi2OHIciMnNsYBQxb2MPaInCVdxVxvGQntBP0evx5A8qtnxDSc4I87Cb3SxODGw4bAqyzHOsuNEfJB/xVebFlqmeN2CarXZ2u6Vrs9b898Kvp</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">__VIEWSTATE</stringProp>
+                </elementProp>
+                <elementProp name="__VIEWSTATEGENERATOR" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.value">B42CDBE2</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">__VIEWSTATEGENERATOR</stringProp>
+                </elementProp>
+                <elementProp name="ctl00$MainContent$LoginUser$UserName" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.value">editor</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">ctl00$MainContent$LoginUser$UserName</stringProp>
+                </elementProp>
+                <elementProp name="ctl00$MainContent$LoginUser$LoginButton" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.value">Log+in</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">ctl00$MainContent$LoginUser$LoginButton</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/blog/Account/login.aspx</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Create_Post" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
           <boolProp name="TransactionController.parent">true</boolProp>
@@ -133,73 +221,6 @@
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
             <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
-          <hashTree/>
-        </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Login" enabled="true">
-          <boolProp name="TransactionController.includeTimers">false</boolProp>
-          <boolProp name="TransactionController.parent">true</boolProp>
-        </TransactionController>
-        <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login" enabled="true">
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="ctl00%24MainContent%24LoginUser%24Password" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">editor</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">ctl00%24MainContent%24LoginUser%24Password</stringProp>
-                  <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-                <elementProp name="__EVENTVALIDATION" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">vuOzGDtiSNqjDuiBuX4hbOU/2FatB2LL2hb/2FsJQo/2BsLvQNJe220bCkji78uiNBq/2Fm3ay0pb/2FoNl/2FYirXEk0cUH0HUvG6blDWWnd8Y981eHOjwp70IFeL0uVV4QYrbAjLQI7Cd5lxldQdbusiH6/2FJiCZMMa6lgQ9O/2BES6uPa0OudZiOCXV4</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">__EVENTVALIDATION</stringProp>
-                  <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-                <elementProp name="__VIEWSTATE" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">zjxxXIqebfOmWwDymuOKb9bfNNv2PvGsIm2wVeYONSfPcPKUs/2Fitz1gUAG9C1oRe2b9FCqdm/2Fp1/2BtNttA7eooiRqOmkxlraDxm/2Fyb3ffMReNHXmm730Ut7Nv196ZWGRgTTL9GZlSxwbZmXIQkyzy7gyz/2BTnue4ESo0ixbKGkinIfu/2Bdl</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">__VIEWSTATE</stringProp>
-                  <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-                <elementProp name="__VIEWSTATEGENERATOR" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">B42CDBE2</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">__VIEWSTATEGENERATOR</stringProp>
-                  <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-                <elementProp name="ctl00%24MainContent%24LoginUser%24UserName" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">editor</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">ctl00%24MainContent%24LoginUser%24UserName</stringProp>
-                  <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <stringProp name="HTTPSampler.domain"></stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol"></stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/blog/Account/Login.aspx</stringProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.implementation">Java</stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
           </HTTPSamplerProxy>
