@@ -195,46 +195,23 @@
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="get_view_state_RegEx" enabled="true">
-              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-              <stringProp name="RegexExtractor.refname">view_state</stringProp>
-              <stringProp name="RegexExtractor.regex">VIEWSTATE&quot; value=&quot;(.*?)&quot;</stringProp>
-              <stringProp name="RegexExtractor.template">$1$</stringProp>
-              <stringProp name="RegexExtractor.default">view_state_NOT_FOUND</stringProp>
-              <stringProp name="RegexExtractor.match_number"></stringProp>
-            </RegexExtractor>
-            <hashTree/>
-            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="view_state_generator_RegEx" enabled="true">
-              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-              <stringProp name="RegexExtractor.refname">view_state_generator</stringProp>
-              <stringProp name="RegexExtractor.regex">VIEWSTATEGENERATOR&quot; value=&quot;(.*?)&quot;</stringProp>
-              <stringProp name="RegexExtractor.template">$1$</stringProp>
-              <stringProp name="RegexExtractor.default">view_state_generator_NOT_FOUND</stringProp>
-              <stringProp name="RegexExtractor.match_number"></stringProp>
-            </RegexExtractor>
-            <hashTree/>
-            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="event_validator_RegEx" enabled="true">
-              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-              <stringProp name="RegexExtractor.refname">event_validator</stringProp>
-              <stringProp name="RegexExtractor.regex">EVENTVALIDATION&quot; value=&quot;(.*?)&quot;</stringProp>
-              <stringProp name="RegexExtractor.template">$1$</stringProp>
-              <stringProp name="RegexExtractor.default">event_validator_NOT_FOUND</stringProp>
-              <stringProp name="RegexExtractor.match_number"></stringProp>
-            </RegexExtractor>
-            <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="false">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
-              <stringProp name="cacheKey">true</stringProp>
-              <stringProp name="script">def response = prev.getResponseDataAsString() 
-def viewStateRegEx = ( response =~ &quot;&quot;&quot;VIEWSTATE&quot; value=&quot;(.*?)&quot;&quot;&quot;)
-def viewStateGeneratorRegEx = ( response =~ &quot;&quot;&quot;VIEWSTATEGENERATOR&quot; value=&quot;(.*?)&quot;&quot;&quot;)
-def eventValidatorRegEx = ( response =~ &quot;&quot;&quot;EVENTVALIDATION&quot; value=&quot;(.*?)&quot;&quot;&quot;)
+              <stringProp name="cacheKey">false</stringProp>
+              <stringProp name="script">def response = prev.getResponseDataAsString()
+def regex = /VIEWSTATE&quot; value=&quot;(.*?)&quot;/  
+def viewStateRegEx = ( response =~ regex)
+def viewStateGeneratorRegEx = ( response =~ &quot;VIEWSTATEGENERATOR.*?value=.(.*?)\&quot;&quot;)
+def eventValidatorRegEx = ( response =~ &quot;EVENTVALIDATION.*?value=.(.*?)\&quot;&quot;)
+//
+vars.put(&apos;view_state&apos;, viewStateRegEx[0][1].toString())
+vars.put(&apos;view_state_generator&apos;,  viewStateGeneratorRegEx[0][1].toString())
+vars.put(&apos;event_validator&apos;, eventValidatorRegEx[0][1].toString())
 
-vars.put(&apos;view_state&apos;, viewStateRegEx[0].toString())
-vars.put(&apos;view_state_generator&apos;,  viewStateGeneratorRegEx[0].toString())
-vars.put(&apos;event_validator&apos;, eventValidatorRegEx[0].toString())</stringProp>
+log.warn(vars.get(&apos;view_state_generator&apos;))
+</stringProp>
             </JSR223PostProcessor>
             <hashTree/>
           </hashTree>
