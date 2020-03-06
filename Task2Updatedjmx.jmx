@@ -142,6 +142,56 @@
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
+      <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+        <collectionProp name="Asserion.test_strings">
+          <stringProp name="49587">201</stringProp>
+          <stringProp name="49586">200</stringProp>
+          <stringProp name="50549">302</stringProp>
+        </collectionProp>
+        <stringProp name="Assertion.custom_message"></stringProp>
+        <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+        <boolProp name="Assertion.assume_success">false</boolProp>
+        <intProp name="Assertion.test_type">40</intProp>
+      </ResponseAssertion>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Flow Control Action" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Create_file_csv_JSR223" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">false</stringProp>
+            <stringProp name="script">loops_count = vars.get(&quot;LOOPS&quot;)
+baseDir = vars.get(&quot;baseDir&quot;)
+file = new File(baseDir + &quot;file.csv&quot;)
+def randomStr = &quot;${__RandomString(${LOOPS},abcdefghijklmnopqrstuvwxyz,)}&quot;
+
+if(loops_count.toInteger() &gt; 100) {
+	file.append(randomStr)
+	vars.put(&apos;text&apos;, randomStr)
+}</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -216,21 +266,16 @@
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get_Parameters_For_Login" enabled="true">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get_Parameters_For_Login_JSR223" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="cacheKey">false</stringProp>
               <stringProp name="script">def response = prev.getResponseDataAsString()
 def regex = /VIEWSTATE&quot; value=&quot;(.*?)&quot;/  
-def viewStateRegEx = ( response =~ regex)
-def viewStateGeneratorRegEx = ( response =~ &quot;VIEWSTATEGENERATOR.*?value=.(.*?)\&quot;&quot;)
-def eventValidatorRegEx = ( response =~ &quot;EVENTVALIDATION.*?value=.(.*?)\&quot;&quot;)
-//
-vars.put(&apos;view_state&apos;, viewStateRegEx[0][1].toString())
-vars.put(&apos;view_state_generator&apos;,  viewStateGeneratorRegEx[0][1].toString())
-vars.put(&apos;event_validator&apos;, eventValidatorRegEx[0][1].toString())
-
+vars.put (&apos;view_state&apos;, (( m = response =~ regex ) ? m[0][1] : &quot;view_state_NOT_FOUND&quot; ))
+vars.put (&apos;view_state_generator&apos;, (( m = response =~ &quot;VIEWSTATEGENERATOR.*?value=.(.*?)\&quot;&quot; ) ? m[0][1] : &quot;view_state_generator_NOT_FOUND&quot; ))
+vars.put (&apos;event_validator&apos;, (( m = response =~ &quot;EVENTVALIDATION.*?value=.(.*?)\&quot;&quot; ) ? m[0][1] : &quot;event_validator_NOTFOUND&quot; ))
 </stringProp>
             </JSR223PostProcessor>
             <hashTree/>
@@ -353,7 +398,7 @@ vars.put(&apos;event_validator&apos;, eventValidatorRegEx[0][1].toString())
             <boolProp name="TransactionController.parent">false</boolProp>
           </TransactionController>
           <hashTree>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate_Post_Data" enabled="true">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate_Post_Data_JSR223" enabled="false">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -484,6 +529,16 @@ if(loops_count.toInteger() &gt; 100) {
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
             </HTTPSamplerProxy>
             <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Create_Post_Responce_Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="2363">Id</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
               <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="Random CSV Data Set Config" enabled="true">
                 <stringProp name="filename">date_time.csv</stringProp>
                 <stringProp name="fileEncoding">UTF-8</stringProp>
@@ -495,18 +550,39 @@ if(loops_count.toInteger() &gt; 100) {
                 <boolProp name="independentListPerThread">false</boolProp>
               </com.blazemeter.jmeter.RandomCSVDataSetConfig>
               <hashTree/>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Create_Post_Responce_Assertion" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="2363">Id</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.custom_message"></stringProp>
-                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">2</intProp>
-              </ResponseAssertion>
-              <hashTree/>
             </hashTree>
           </hashTree>
+        </hashTree>
+      </hashTree>
+      <PostThreadGroup guiclass="PostThreadGroupGui" testclass="PostThreadGroup" testname="tearDown Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </PostThreadGroup>
+      <hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Flow Control Action" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Delete_file_csv_JSR223" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">false</stringProp>
+            <stringProp name="script">baseDir = vars.get(&quot;baseDir&quot;)
+new File(baseDir + &quot;file.csv&quot;).delete()</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
         </hashTree>
       </hashTree>
     </hashTree>
