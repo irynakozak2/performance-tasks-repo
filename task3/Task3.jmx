@@ -32,7 +32,7 @@
           </elementProp>
           <stringProp name="HTTPSampler.domain">192.168.1.117</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path"></stringProp>
           <stringProp name="TestPlan.comments">Notice Timeouts:
@@ -102,6 +102,11 @@ Connect to 5s</stringProp>
               <stringProp name="Argument.value">shtnpruzlg</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="baseDir" elementType="Argument">
+              <stringProp name="Argument.name">baseDir</stringProp>
+              <stringProp name="Argument.value">${__groovy(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
@@ -142,7 +147,8 @@ Connect to 5s</stringProp>
               <collectionProp name="ModuleController.node_path">
                 <stringProp name="764597751">Test Plan</stringProp>
                 <stringProp name="764597751">Test Plan</stringProp>
-                <stringProp name="-198525078">SearchByName</stringProp>
+                <stringProp name="-1915511812">OpenRandomPage</stringProp>
+                <stringProp name="555873560">If Pages exist</stringProp>
               </collectionProp>
             </ModuleController>
             <hashTree/>
@@ -213,7 +219,7 @@ Connect to 5s</stringProp>
               <collectionProp name="ModuleController.node_path">
                 <stringProp name="764597751">Test Plan</stringProp>
                 <stringProp name="764597751">Test Plan</stringProp>
-                <stringProp name="-1915511812">OpenRandomPage</stringProp>
+                <stringProp name="-1679915457">Comment</stringProp>
               </collectionProp>
             </ModuleController>
             <hashTree/>
@@ -250,7 +256,7 @@ Connect to 5s</stringProp>
             <stringProp name="HTTPSampler.port"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/blog/${randDate}/default</stringProp>
+            <stringProp name="HTTPSampler.path">/blog/${date_time}/default</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -261,6 +267,17 @@ Connect to 5s</stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
           </HTTPSamplerProxy>
           <hashTree>
+            <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="Get Random Data CSV Set Config" enabled="true">
+              <stringProp name="filename">date_time.csv</stringProp>
+              <stringProp name="fileEncoding">UTF-8</stringProp>
+              <stringProp name="delimiter">,</stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <boolProp name="randomOrder">true</boolProp>
+              <boolProp name="ignoreFirstLine">false</boolProp>
+              <boolProp name="rewindOnTheEndOfList">true</boolProp>
+              <boolProp name="independentListPerThread">false</boolProp>
+            </com.blazemeter.jmeter.RandomCSVDataSetConfig>
+            <hashTree/>
             <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename"></stringProp>
