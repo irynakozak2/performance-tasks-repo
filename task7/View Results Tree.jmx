@@ -266,6 +266,10 @@ Connect to 5s</stringProp>
           </FloatProperty>
         </ThroughputController>
         <hashTree/>
+        <com.blazemeter.jmeter.control.WeightedSwitchController guiclass="com.blazemeter.jmeter.control.WeightedSwitchControllerGui" testclass="com.blazemeter.jmeter.control.WeightedSwitchController" testname="bzm - Weighted Switch Controller" enabled="true">
+          <boolProp name="IsRandomChoice">false</boolProp>
+        </com.blazemeter.jmeter.control.WeightedSwitchController>
+        <hashTree/>
       </hashTree>
       <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="AdminLogin" enabled="false"/>
       <hashTree>
